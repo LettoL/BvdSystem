@@ -1,9 +1,10 @@
 import React from 'react';
+import {AuthPage} from "./pages/auth.page";
 
 function App() {
   return (
     <>
-      <p>Project</p>
+      <AuthPage/>
     </>
   );
 }
