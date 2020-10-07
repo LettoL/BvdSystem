@@ -9,9 +9,19 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import {useStore} from "effector-react";
+import {$login, $password, changeLogin, changePassword, submitForm} from "../models";
 
 export const SignIn = () => {
   const classes = useStyles();
+
+  const login = useStore($login)
+  const password = useStore($password)
+
+  const submitClick = (e: any) => {
+    e.preventDefault()
+    submitForm()
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -34,6 +44,8 @@ export const SignIn = () => {
             name="login"
             autoComplete="login"
             autoFocus
+            value={login}
+            onChange={e => changeLogin(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -45,6 +57,8 @@ export const SignIn = () => {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={password}
+            onChange={e => changePassword(e.target.value)}
           />
           <Button
             type="submit"
@@ -52,6 +66,7 @@ export const SignIn = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={submitClick}
           >
             Sign In
           </Button>

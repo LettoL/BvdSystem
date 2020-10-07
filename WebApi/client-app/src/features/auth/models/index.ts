@@ -1,13 +1,11 @@
-import {createEffect, createEvent, createStore, sample} from "effector";
+import {createEvent, createStore, forward, sample} from "effector";
+import {fxSignIn} from "../../../data/auth";
+import {SignInData} from "../../../data/auth/types";
 
 export const changeLogin = createEvent<string>()
 export const changePassword = createEvent<string>()
 export const submitForm = createEvent()
-
-export const fxSignIn = createEffect(async (data: SignInData) => {
-  const {login, password} = data
-  console.log(login, password)
-})
+export const signIn = createEvent<SignInData>()
 
 export const $login = createStore<string>('')
   .on(changeLogin, (_, login) => login)
@@ -19,10 +17,10 @@ sample({
   source: {$login, $password},
   clock: submitForm,
   fn: (data) => ({login: data.$login, password: data.$password}),
-  target: fxSignIn
+  target: signIn
 })
 
-interface SignInData {
-  login: string
-  password: string
-}
+forward({
+  from: signIn,
+  to: fxSignIn
+})
