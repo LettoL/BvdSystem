@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {useStore} from "effector-react";
-import {$login, $password, changeLogin, changePassword, submitForm} from "../models";
+import {$login, $password, changeLogin, changePassword, submitForm} from "../model";
 
 export const SignIn = () => {
   const classes = useStyles();
