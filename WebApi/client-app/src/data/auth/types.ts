@@ -10,6 +10,6 @@ export interface LoggedInUser {
 }
 
 export enum UserRole {
-  Admin,
-  Manager
+  Admin = 10,
+  Manager = 20
 }

@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -14,6 +11,9 @@ namespace WebApi
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<PostgresContext>();
+            
+            services.AddControllers();
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -27,7 +27,7 @@ namespace WebApi
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context => { await context.Response.WriteAsync("Hello World!"); });
+                endpoints.MapControllers();
             });
         }
     }
